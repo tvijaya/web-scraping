@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body style="padding-left:30px; padding-right:30px;">
+  <div clas="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="panel panel-default" style="padding-left:30px; padding-right:30px; padding-bottom-30px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1> Latest Mars News</h1>
+            <!-- display mars news information -->
+        <h3>{{ mars_news.news_title }}</h3>
+        <p>{{ mars_news.news_description }}</p>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-8">
+          <!-- display featured image -->
+            <h1> Featured Mars Image</h1>
+            <img src= {{ mars_news.featured_image_url  }} width="100%" />
+
+        </div>
+        <div class="col-md-4">
+          <br/>
+          <div>
+            <div class="panel panel-default" style="padding-left:30px; padding-right:30px;">
+              <!-- display mars current weather -->
+              <h3 >Current Weather on Mars</h3>
+              <p>{{ mars_news.mars_weather  }}</p>
+            </div>
+          </div>
+          <div>
+            <div class="panel panel-default" style="padding-left:10px; padding-right:10px; padding-bottom:10px;">
+              <!-- display mars facts -->
+              <h3 >Mars Facts</h3>
+              <table border=1 width="100%">
+                  <tr>
+                    <th style="padding:2px; font-weight:bold;">Description</th>
+                    <th style="padding:2px; font-weight:bold;">Value</th>
+                  </tr>
+                  <!--  mars facts is a list of dictionaries. each dictionary has description and value-->
+                {% for mars_fact in mars_news.mars_facts %}
+
+                  <tr>
+                    <td style="padding:2px; font-weight:bold;">{{ mars_fact.description}}</td>
+                    <td style="padding:2px; font-weight:bold;">{{ mars_fact.value}}</td>
+                  </tr>
+                {% endfor %}
+                
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+    <br/>
+    <br/>
+
+    <div class="panel panel-default" style="padding-left:30px; padding-right:30px; padding-bottom-30px;">
+    <div>
+      <h1 style="text-align:center;">Mars Hemispheres</h1>
+      <hr>
+    </div>
+  
+    <div class="row">
+      <!-- .hemisphere_image_urls is a list of dictionaries. each dictionary has the img_url and title -->
+        {% for hemisphere_image in mars_news.hemisphere_image_urls %}
+        
+          <div class="col-md-6">
+            <div class="panel panel-default" style="padding:10px; ">
+              <img src= {{ hemisphere_image.img_url  }} width="100%"/>
+              <h3>{{ hemisphere_image.title  }}</h3>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+  </div>
+  </div>
+
+</body>
+</html>
